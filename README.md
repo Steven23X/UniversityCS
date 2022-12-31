@@ -1,6 +1,6 @@
 # UniversityCS - FMI Unibuc - Bucharest
 
-![](Resources/ReadMeResources/banner.jpg)
+![](Resources/ReadmeResources/banner.jpg)
 
 ### This repo contains my university courses , homeworks and projects.
 
