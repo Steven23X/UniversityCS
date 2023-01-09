@@ -1,0 +1,13 @@
+Task 1:
+	Test 0: OK (50)
+
+
+Task 2:
+	Test 0: OK (30)
+
+
+Task 3:
+	Test 0: OK (20)
+
+
+Estimated grade 100p / 100
