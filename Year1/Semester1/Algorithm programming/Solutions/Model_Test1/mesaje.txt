@@ -1,0 +1,6 @@
+Linia numarul 2 din fisier contine 2 propozitii si cel mai ling cuvant este zile
+Linia numarul 3 din fisier contine 4 propozitii si cel mai ling cuvant este voi
+Linia numarul 1 din fisier contine 3 propozitii si cel mai ling cuvant este usoare
+Linia numarul 2 din fisier contine 2 propozitii si cel mai ling cuvant este zile
+Linia numarul 3 din fisier contine 4 propozitii si cel mai ling cuvant este voi
+Linia numarul 1 din fisier contine 3 propozitii si cel mai ling cuvant este usoare
