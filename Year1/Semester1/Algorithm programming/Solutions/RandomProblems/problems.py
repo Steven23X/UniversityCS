@@ -313,28 +313,148 @@ print(clasament(d,"Alin Enache","Ioana Matei"))
 
 
 #%%
+import math
+
 def citire_matrice1(fisier):
     f=open(fisier,"r")
     ls=[[int(x) for x in linie.split()]for linie in f]
-    for linie in ls:
+    n=len(ls[0])
+    for linie in ls[1:]:
+        if len(linie)!=n:
+            return None
     return ls
 
-print(citire_matrice1("date1.in"))
+def cifr(n): #prima si ult cifra egale
+    nr=len(str(n))
+    if n%10 == n//math.pow(10,nr-1):
+        return True
+    return False
 
+def multimi(m,*indici):
+    n=len(m)
+    i=indici[0]
+    set_neg_f={m[i][j] for j in range(n) if m[i][j]<0}
+    set_poz_f={m[i][j] for j in range(n) if m[i][j]>=0 and cifr(m[i][j])==True}
+    for i in indici[1:]:
+        set_neg={m[i][j] for j in range(n) if m[i][j]<0}
+        set_poz={m[i][j] for j in range(n) if m[i][j]>=0 and cifr(m[i][j])==True}
+        set_neg_f&=set_neg
+        set_poz_f|=set_poz
+    return set_poz_f,set_neg_f
 
+mat=citire_matrice1("matrice.in")
 
+tuplu=multimi(mat,len(mat)-3,len(mat)-2,len(mat)-1)
+ls_poz=[int(x) for x in tuplu[0]]
+ls_poz.sort()
+print(*ls_poz,sep=" ")
 
+tuplu=multimi(mat,len(mat)-1,0)
+ls_neg=[int(x) for x in tuplu[1]]
+print(len(ls_neg),sep=" ")
 
+#%%
+def modifica_prefix(x,y,prop):
+    ls=prop.split()
+    prop_nou=[]
+    cnt=0
+    for cuv in ls:
+        if cuv.startswith(x):
+            cuv=cuv.replace(x,y)
+            prop_nou.append(cuv)
+            cnt+=1
+        else:
+            prop_nou.append(cuv)
+    prop_nou=" ".join(prop_nou)
+    return prop_nou,cnt
 
+def poz_max(ls):
+    pozitii=[i+1 for i in range(len(ls)) if ls[i]==max(ls)]
+    return pozitii
+            
+a=input("a=")
+b=input("b=")
+f=open("propozitii.in")
+ls=[]
+for linie in f:
+    prop_nou,nr=modifica_prefix(a,b,linie)
+    with open("propozitii.out","a") as g:
+        g.write(f"{prop_nou}\n")
+    ls.append(nr)
+rez=poz_max(ls)
+print(*rez)
 
+#%%
+def sterge_carte(d,cod_carte):
+    if cod_carte in d.keys():
+        id_scriitor=d[cod_carte][0]
+        d.pop(cod_carte)
+        nume=d[id_scriitor]
+        return nume
+    else:
+        return None
+def carti_autor(d,cod_autor):
+    nume=d[cod_autor]
+    ls=[]
+    for x in d.values():
+        if x[0]==cod_autor:
+            ls.append([x[3],x[1],x[2]])
+    return nume,ls
+            
+f=open("autori.in")
+ls=f.readline().split()
+d={}
+n=int(ls[0])
+m=int(ls[1])
+for i in range(n):
+    ls=f.readline().strip("\n").split(maxsplit=1)
+    key=(int(ls[0]))
+    d[key]=ls[1]
+for i in range(m):
+    ls=f.readline().strip("\n").split(maxsplit=4)
+    key=int(ls[0])
+    cod_carte=int(ls[1])
+    an=int(ls[2])
+    nr_pag=int((ls[3]))
+    nume=ls[4]
+    d[cod_carte]=(key,an,nr_pag,nume)
 
+#print(d)\
+'''
+cod_input=int(input("cod carte="))
+nume=sterge_carte(d,cod_input)
+if nume :
+    print(f"Cartea a fost scrisa de {nume} \n {d}")
+else:
+    print("Cartea nu exista.")
+'''
+cod_autor=int(input("cod autor="))
+nume,ls=carti_autor(d,11)
 
+print(nume)
+for carte in ls:
+    print(" ".join(map(str,carte)))
 
+#%%
+f=open("text1.in")
+d={}
+n=0
+for linie in f:
+    linie=linie.strip("\n").lower()
+    for x in linie:
+        if x.isalpha():
+            n+=1
+            if x in d.keys():
+                d[x]+=1
+            else:
+                d[x]=1
+print(n)
+print(d["e"])
+for x in d.keys():
+    d[x]=d[x]/n
+    d[x]=round(d[x],3)
 
-
-
-
-
-
-
-
+ls=list(zip(d.keys(),d.values()))
+ls.sort(key=lambda x: (-x[1],x[0]))
+for elem in ls:
+    print(f"{elem[0]} : {elem[1]}")
