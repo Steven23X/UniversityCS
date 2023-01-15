@@ -458,3 +458,88 @@ ls=list(zip(d.keys(),d.values()))
 ls.sort(key=lambda x: (-x[1],x[0]))
 for elem in ls:
     print(f"{elem[0]} : {elem[1]}")
+#%%
+def insereaza_legatura(d,cap1,cap2,culoare,eticheta):
+    tuplu=tuple([cap1,cap2])
+    for x in d.values():
+        if tuplu==x:
+            return False
+        else:
+            d[(culoare,eticheta)]=tuplu
+            return True
+
+f=open("legaturi.in")
+d={}
+for linie in f:
+    ls=linie.strip("\n").split(maxsplit=3)
+    culoare=ls[2]
+    eticheta=ls[3]
+    tuplu=tuple([[int(x) for x in ls[i].rstrip("]").lstrip("[").split(",")] for i in range(0,2)])
+    cheie=(culoare,eticheta)
+    d[cheie]=tuplu
+
+print(d)
+
+insereaza_legatura(d,(1,2),(1,3),"negru","legatura noua")
+print(d)
+#%%
+def citire_numere(nume_fisier):
+    f=open(nume_fisier,"r")
+    ls=[[int(x) for x in linie.split()]for linie in f]
+    return ls
+
+def prelucrare_lista(ls):
+    for subls in ls:
+        minim=min(subls)
+        subls[:]=[x for x in subls if x!=minim]
+    m=min([len(subls) for subls in ls])
+    for subls in ls:
+        subls[:]=subls[:m]
+    
+    
+ls=citire_numere("numere.in")
+for linie in ls:
+    print(" ".join(map(str,linie)))
+
+k=int(input("k="))
+ls_f=[]
+for linie in ls:
+    for elem in linie:
+        if len(str(elem))==k and elem not in ls_f:
+            ls_f.append(elem)
+with open("numere.out","w") as g:
+    if ls_f:
+        ls_f.sort(key= lambda x : -x)
+        g.write(" ".join(map(str,ls_f)))
+    else:
+        g.write("Imposibil!")
+
+#%%
+def sterge_ore(d,cinema,film,ore):
+    for ora in ore:
+        d[cinema][film].remove(ora)
+    print(d[cinema][film])
+
+def cinema_film(d,*cinemauri,ora_minima,ora_maxima):
+    ls_f=[]
+    for cinema in cinemauri:
+        for film in d[cinema]:
+            ls=[x for x in d[cinema][film] if x >= ora_minima and x<= ora_maxima]
+            if ls:
+                ls_f.append((film,cinema,ls))
+    ls_f.sort(key= lambda x:(x[0],-len(x[2])))
+    return ls_f
+f=open("cinema.in","r")
+d={}
+for linie in f:
+    ls=linie.strip("\n").split(" % ")
+    ore=[x for x in ls[2].split()]
+    cinema=ls[0]
+    film=ls[1]
+    if cinema in d.keys():
+        d[cinema][film]=ore
+    else:
+        d[cinema]={film:ore}
+
+ls=cinema_film(d,"Cinema 1","Cinema 2",ora_minima="14:00",ora_maxima="22:00")
+print(ls)
