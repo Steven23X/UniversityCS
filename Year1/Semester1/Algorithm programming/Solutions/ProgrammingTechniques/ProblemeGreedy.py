@@ -79,4 +79,76 @@ print(f"Numarul minim de sali este {len(sali)}")
 
 #%%
     
+"""
+'''v = [None, 12, 1, 3, 4, 5, 7]
+           i
+M = 14
 
+
+sume:     0      1     2    .....        12        14
+i = 0    True                          False
+i = 1    True  False  False.......     True  
+i = 2                                  True
+
+                                                 True
+
+
+termen:
+
+termen[i][s] = v[i]
+
+
+a[i][s] - True / False : pot obtine suma s din primele i elemente
+
+a[i - 1][s]: True 
+a[i - 1][s] == False and s >= v[i] and a[i-1][s - v[i]] == True
+  a[i][s] = True
+
+'''
+
+def Afisare(matrice_numere, linia, suma):
+  if suma == 0: 
+    pass
+  else:
+    Afisare(matrice_numere, linia - 1, suma - matrice_numere[linia][suma])
+    print(matrice_numere[linia][suma])
+
+lista_numere = [None, 12, 1, 3, 4, 5, 7]
+m = 14
+
+dp = [[False for i in range(m + 1)] for i in range(7)]
+matrice_numere = [[False for i in range(m + 1)] for i in range(7)]
+dp[0][0] = True
+
+for i in range(1, 7):
+  for j in range(0, m + 1):
+    if dp[i - 1][j] == True:
+      dp[i][j] = True
+      matrice_numere[i][j] = matrice_numere[i - 1][j]
+    elif dp[i - 1][j] == False and j >= lista_numere[i] and dp[i - 1][j - lista_numere[i]]:
+      dp[i][j] = True
+      matrice_numere[i][j] = lista_numere[i]
+
+if matrice_numere[6][m] != False:
+  Afisare(matrice_numere, 6, m)
+
+
+                            -------------x         
+------------x--   
+       -----x-------
+         ---x------------
+                                ---------x-----
+    --------x
+
+
+# ord dupa capatul din dreapta a intervalul (scandura)
+scandura ordonata
+
+x = coordonata ultimului cui
+
+initializare:
+  x = scandura[0][1]
+parcurg de la scandura a doua ------>   
+    verif capat din stanga scandura noua > x
+                x (cui nou) = capat dreapta scandura curenta
+"""

@@ -312,3 +312,167 @@ n=int(input("n="))
 x=[0 for i in range(n)]
 v=[i for i in range(n) if prim(i)]
 prime(0)
+
+#%%
+import math
+
+def solutie_posibila5(k):
+    if x[k] in x[:k]:
+        return False
+    if k==0:
+            return True
+    return math.gcd(x[k],x[k-1])==1
+
+def solutie5():
+    return True
+
+def afisare5():
+    print(*x,sep=" ")
+    
+def bkt1(k):
+    if k==n:
+        if solutie5():
+            afisare5()
+    else:
+        for i in range(n):
+            x[k]=nr[i]
+            if solutie_posibila5(k):
+                bkt1(k+1)
+                    
+f=open("sirpie.in")
+n=int(f.readline())
+nr=[int(x) for x in f.readline().split()]
+nr.sort()
+print(nr)
+x=[0 for i in range(n)]
+bkt1(0)
+
+#%%
+def solutie_posibila6(k):
+    if k==0:
+        return True
+    if x[k]>x[k-1]:
+        return True
+    return False
+def solutie6():
+    if v[0] not in x or v[nrf] not in x:
+        return False
+    baieti=len([i for i in range(nrf+1,nrb+nrf+1) if i in x])
+    fete=len([i for i in range(nrf+1) if i in x])
+    return fete==baieti
+def afisare6():
+    print(*x,sep=",")
+    
+def elevi(k):
+    if k==s:
+        if solutie6():
+            afisare6()
+    else:
+        for i in range(k,len(v)):
+            x[k]=v[i]
+            if solutie_posibila6(k):
+                elevi(k+1)
+            
+nrf=4
+nrb=3
+s=4
+x=[0 for i in range(s)]
+v=[i for i in range(1,nrb+nrf+1)]
+elevi(0)
+#%%
+#problema teava
+def afisare7(k):
+    global cnt
+    print(*x[:k],sep="+")
+    cnt+=1
+def solutie7(k):
+    print(len(set(x[:k])))
+    if True!=2:
+        return False
+    return sum(x[:k])==p
+def solutie_posibila7(k):
+    if k==0:
+        return True
+    else:
+        return sum(x[:k+1])<=p and x[k]>=x[k-1]
+def teava(k):
+    if solutie7(k):
+        afisare7(k)
+    else:
+        for i in range(len(v)):
+            x[k]=v[i]
+            if solutie_posibila7(k):
+                teava(k+1)
+cnt=0  
+p=int(input("p="))
+x=[0 for i in range(p)]
+v=[i for i in range(1,p) if p%i==0]
+
+teava(0)
+print(cnt)
+
+#%%
+global cnt
+def solutie_posibila8(k):
+    if sum(x[:k+1])>c:
+        return False
+    elem=x[k]
+    for i in range(0,k):
+        if abs(x[i]-elem)>p:
+            return False
+    return True
+def solutie8(k):
+    if sum(x[:k])==c and x[0]==x[k-1]:
+        return True
+def afisare8(k):
+    print(*x[:k],sep="")
+def marginit(k):
+    if solutie8(k):
+        afisare8(k)
+    else:
+        for i in range(1,c+1):
+            x[k]=i
+            if solutie_posibila8(k):
+                marginit(k+1)
+        
+p=int(input("p="))
+c=int(input("c="))
+x=[0 for i in range(c)]
+marginit(0)
+#%%
+def conditie_posibila9(k):
+    if k==0:
+        if x[k] not in "aeiou":
+            return False
+    elem=x[k]
+    for i in range(k):
+        if x[i]==elem:
+            return False
+    return True
+
+def solutie9():
+    return True
+
+def afisare9(k):
+    print(*x[:k])
+def parola(k):
+    if k==n:
+        if solutie9():
+            afisare9(k)
+    else:
+        if T[k]=='l':
+            for j in range(len(L)):
+                x[k]=L[j]
+                if conditie_posibila9(k):
+                    parola(k+1)
+        else:
+            for j in range(len(S)):
+                x[k]=S[j]
+                if conditie_posibila9(k):
+                    parola(k+1)
+n=6
+T=['l','s','l','s','l','l']
+L=['a','b','c','D']
+S=['@','.']
+x=[0 for i in range(n+1)]
+parola(0)
