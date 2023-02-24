@@ -17,7 +17,7 @@
         + [Geometry and Linear Algebra](Year1/Semester2/Geometry%20and%20linear%20algebra/)
         + [Object Oriented Programming](Year1/Semester2/Object%20Oriented%20Programming/)
         + [Web Techniques](Year1/Semester2/Web%20techniques/)
-        + [Formal and Automatic Languages](Year1/Semester2/Formal%20and%20automatic%20languages/)
+        + [Theory of Computation](Year1/Semester2/Theory%20of%20computation/)
         + [Data Structures](Year1/Semester2/Data%20structures/)
         + [Database](Year1/Semester2/Database/)
         + [Specific Skills in a Foreign Language](Year1/Semester2/Specific%20skills%20in%20a%20foreign%20language/)
