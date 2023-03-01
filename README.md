@@ -16,7 +16,7 @@
     * ***[Semester2:](Year1/Semester2)***
         + [Geometry and Linear Algebra](Year1/Semester2/Geometry%20and%20linear%20algebra/)
         + [Object Oriented Programming](Year1/Semester2/Object%20Oriented%20Programming/)
-        + [Web Techniques](Year1/Semester2/Web%20techniques/)
+        + [Web Technologies](Year1/Semester2/Web%20technologies/)
         + [Theory of Computation](Year1/Semester2/Theory%20of%20computation/)
         + [Data Structures](Year1/Semester2/Data%20structures/)
         + [Database](Year1/Semester2/Database/)
